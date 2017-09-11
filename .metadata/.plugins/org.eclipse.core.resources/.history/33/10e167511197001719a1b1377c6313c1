@@ -1,0 +1,20 @@
+#include <msp430g2231.h>
+
+
+
+unsigned int blink = 1; //Set random bit to 1 so that I can tell the LEDs to light up
+
+void main(void)
+{
+WDTCTL = WDTPW + WDTHOLD; // Stop watchdog timer
+
+    while (1)
+    {
+
+        if(blink > 0)
+        {
+            P1OUT ^= (BIT0 + BIT6); // Toggle P1.0 and P1.6 using exclusive-OR
+            __delay_cycles(100000); // SW Delay of 10000 cycles at 1Mhz
+        }
+    }
+}
